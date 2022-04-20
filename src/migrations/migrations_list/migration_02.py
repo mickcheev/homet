@@ -3,19 +3,16 @@ from migrations.base_migration import BaseMigration
 
 sql_changes = """
     CREATE TABLE User(
-        name TEXT,
+        first_name TEXT,
         second_name TEXT,
         password TEXT,
         email TEXT PRIMARY KEY,
-        join_date TEXT,
-        telegram TEXT
+        accession_date TEXT,
+        telegram_account TEXT
 
     );
-    
-    INSERT INTO MigrationVersion VALUES (0);
-    
-"""
 
+"""
 migration = BaseMigration(
     number=2,
     changes =sql_changes 
