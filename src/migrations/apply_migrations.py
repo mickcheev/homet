@@ -7,9 +7,10 @@ from loguru import logger
 import config
 
 from migrations.check_migration_version import get_migration_version
-from migrations.migrations_list import initial, migration_02
+from migrations.migrations_list import initial, migration_02, migration_03
 
-migration_list = [initial.migration, migration_02.migration]
+migration_list = [initial.migration, migration_02.migration,
+        migration_03.migration]
 
 conn = sqlite3.connect(config.DB_PATH)
 cursor = conn.cursor()
@@ -42,6 +43,7 @@ def apply_migrations():
     if last_migration_number == migration_list[-1].number: return
 
     for migration in migration_list[last_migration_number:]:
+        print(migration.number)
         migration.apply_changes(cursor)
         conn.commit()
 
