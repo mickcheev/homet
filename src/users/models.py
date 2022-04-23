@@ -13,7 +13,7 @@ class User(Model):
     second_name = CharField(max_length=30)
     email = CharField(max_length=30, primary_key=True)
     password = CharField(max_length=128)
-    accession_date = DateField(default=date.today)
+    accession_date = DateField(default=date.today, )
     telegram_account = CharField(max_length=30,  null=True)
 
     class Meta:

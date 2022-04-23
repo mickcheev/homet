@@ -1,7 +1,6 @@
 from loguru import logger
-from migrations import apply_migrations
+from migrations import make_db_tables
 
 logger.add('debuging.log', level='DEBUG')
 
-
-apply_migrations.apply_migrations()
+make_db_tables.create_database()

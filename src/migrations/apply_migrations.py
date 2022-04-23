@@ -21,7 +21,7 @@ def cmp(first, second):
     Comporator function. Takes two
     migration objects and returns the newest
     """
-    return first.number<second.number
+    return first.number < second.number
 
 
 def update_migration_index():
