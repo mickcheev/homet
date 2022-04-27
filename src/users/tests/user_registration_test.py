@@ -13,17 +13,18 @@ testing_user = UserRegistration(
 
 
 class RegistrationUserTest(unittest.TestCase):
+    def tearDown(self) -> None:
+        User.delete().where(User.email == testing_user.email).execute()
+
     def test_user_registration(self):
         db_user = register_user(testing_user)
         self.assertEqual(db_user, User.get(User.email == testing_user.email))
 
     def test_user_existence(self):
-        db_user = register_user(testing_user)
+        register_user(testing_user)
         with self.assertRaises(UserAlreadyExists):
             check_existence(testing_user)
 
-    def tearDown(self) -> None:
-        User.delete().where(User.email == 'sosiso4ka@mail.com').execute()
 
 
 if __name__ == '__main__':
