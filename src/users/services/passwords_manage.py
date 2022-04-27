@@ -7,5 +7,5 @@ def hash_password(source_passwd: str) -> str:
     return h.hexdigest()
 
 
-print(len(hash_password('приветр')))
+print(hash_password('приветр'))
 
