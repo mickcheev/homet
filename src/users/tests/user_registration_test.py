@@ -1,6 +1,6 @@
 import unittest
 
-from users.services.register_user import register_user, check_existence
+from users.services.register_user import register_user, check_existence, delete_user
 from users.entities import UserRegistration
 from users.models import User
 from users.exceptions import UserAlreadyExists
@@ -12,9 +12,9 @@ testing_user = UserRegistration(
         )
 
 
-class RegistrationUserTest(unittest.TestCase):
+class RegistrationUserTestCase(unittest.TestCase):
     def tearDown(self) -> None:
-        User.delete().where(User.email == testing_user.email).execute()
+        delete_user(testing_user.email)
 
     def test_user_registration(self):
         db_user = register_user(testing_user)
@@ -24,7 +24,6 @@ class RegistrationUserTest(unittest.TestCase):
         register_user(testing_user)
         with self.assertRaises(UserAlreadyExists):
             check_existence(testing_user)
-
 
 
 if __name__ == '__main__':

@@ -1,6 +1,4 @@
 from pydantic import BaseModel, constr, Field
-
-
 """
 These entities are used to parse json from
 FastApi requests

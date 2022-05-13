@@ -1,7 +1,7 @@
 from datetime import date
 
 from peewee import SqliteDatabase, Model, CharField, DateField, ForeignKeyField,\
-        IntegerField, TextField, BooleanField
+        IntegerField, TextField, BooleanField, DoesNotExist
 
 from config import DB_PATH
 from users.models import User
@@ -19,7 +19,7 @@ class Node(Model):
     # prime means that it's the root directory
     # that any user has by default
     prime = BooleanField(default=False)
-    parent = IntegerField()
+    parent = IntegerField(null=True)
     owner = ForeignKeyField(User)
     name = CharField(max_length=40)
 
@@ -29,7 +29,6 @@ class Node(Model):
 
 
 class Note(Model):
-    id = IntegerField(primary_key=True)
     author = ForeignKeyField(User)
     title = CharField(max_length=120)
     creation_date = DateField(default=date.today)

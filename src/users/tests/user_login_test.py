@@ -3,7 +3,7 @@ import copy
 
 from users.entities import UserRegistration
 from users.models import User
-from users.services.register_user import register_user
+from users.services.register_user import register_user, delete_user
 from users.services.user_login import login_user
 from users.exceptions import InvalidUserData
 
@@ -16,12 +16,12 @@ changed_user = UserRegistration.parse_obj(testing_user.dict())
 changed_user.email = 'email'
 
 
-class MyTestCase(unittest.TestCase):
+class UserLoginTestCase(unittest.TestCase):
     def setUp(self) -> None:
         register_user(testing_user)
 
     def tearDown(self) -> None:
-        User.delete().where(User.email == testing_user.email).execute()
+        delete_user(testing_user.email)
 
     def test_user_login(self):
         self.assertEqual(login_user(testing_user), User.get(
@@ -36,7 +36,7 @@ class MyTestCase(unittest.TestCase):
         changed_user.password = 'another password'
 
         with self.assertRaises(InvalidUserData):
-            login_user(User)
+            login_user(changed_user)
 
 
 if __name__ == '__main__':
