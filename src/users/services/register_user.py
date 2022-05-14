@@ -1,7 +1,9 @@
+from secrets import token_hex
+
 from peewee import DoesNotExist
 
 from users.entities import UserRegistration
-from users.models import User as DbModel
+from users.models import User as DbModel, TelegramUserKey
 from users.exceptions import UserAlreadyExists
 from users.services.passwords_manage import hash_password
 from notes.services.manage_nodes import create_node, create_prime_node
@@ -26,6 +28,7 @@ def register_user(user: UserRegistration) -> DbModel:
         telegram_account=user.telegram_account,
     )
     create_prime_node(db_user)
+    TelegramUserKey.create(user=db_user, key=str(token_hex(32)))
     return db_user
 
 

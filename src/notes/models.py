@@ -39,7 +39,7 @@ class Note(Model):
     # 2 means that note can be read only by the author
     permission = IntegerField(default=2)
 
-    node = ForeignKeyField(Node)
+    #node = ForeignKeyField(Node)
 
     class Meta:
         database = db

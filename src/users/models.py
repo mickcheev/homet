@@ -1,9 +1,8 @@
 from datetime import date
 
-from peewee import SqliteDatabase, Model, CharField, DateField
+from peewee import SqliteDatabase, Model, CharField, DateField, ForeignKeyField
 
 from config import DB_PATH
-
 
 db = SqliteDatabase(DB_PATH)
 
@@ -14,11 +13,17 @@ class User(Model):
     email = CharField(max_length=30, primary_key=True)
     password = CharField(max_length=128)
     accession_date = DateField(default=date.today, )
-    telegram_account = CharField(max_length=30,  null=True)
+    telegram_account = CharField(max_length=30, null=True)
 
     class Meta:
         database = db
         table_name = 'User'
 
 
+class TelegramUserKey(Model):
+    user = ForeignKeyField(User)
+    key = CharField(max_length=256)
 
+    class Meta:
+        database = db
+        table_name = 'TeleKey'

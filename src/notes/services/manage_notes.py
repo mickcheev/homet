@@ -6,7 +6,7 @@ from users.models import User
 
 
 def create_note(note: NewNote, user: User):
-    return Note.create(content=note.content, author=user, node=note.node)
+    return Note.create(title=note.title, content=note.content, author=user)
 
 
 def update_note(note: EditNote):

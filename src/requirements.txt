@@ -1,3 +1,6 @@
 peewee==3.14.10
-loguru
-pydantic
+loguru~=0.6.0
+pydantic~=1.9.0
+pip~=22.0.4
+setuptools~=62.1.0
+aiogram

@@ -3,8 +3,7 @@ from pydantic import BaseModel, Field
 
 class NewNote(BaseModel):
     title: str = Field(max_length=120)
-    content: str = Field()
-    node: int = Field()
+    content: str
 
 
 class EditNote(BaseModel):
