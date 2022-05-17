@@ -2,7 +2,7 @@ from secrets import token_hex
 
 from peewee import DoesNotExist
 
-from users.entities import UserRegistration
+from users.entities import UserRegistration, GetUser
 from users.models import User as DbModel, TelegramUserKey
 from users.exceptions import UserAlreadyExists
 from users.services.passwords_manage import hash_password
@@ -34,3 +34,9 @@ def register_user(user: UserRegistration) -> DbModel:
 
 def delete_user(user_email: str):
     DbModel.delete().where(DbModel.email == user_email).execute()
+
+
+def db_to_entity(usr: DbModel):
+    return GetUser(email=usr.email, first_name=usr.first_name, second_name=usr.second_name,
+                   telegram_account=usr.telegram_account,
+                   login_key=TelegramUserKey.get(TelegramUserKey.user == usr).key)

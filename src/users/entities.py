@@ -16,3 +16,12 @@ class UserRegistration(BaseModel):
 class UserLogin(BaseModel):
     email: str = Field(max_length=30)
     password: str = Field(max_length=20)
+
+
+class GetUser(BaseModel):
+    first_name: str = Field(max_length=30)
+    second_name: str = Field(max_length=30)
+    email: str
+    telegram_account: str = Field(default=None)
+    login_key: str
+
