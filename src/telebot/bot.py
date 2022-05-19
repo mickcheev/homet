@@ -2,7 +2,7 @@ from aiogram import Bot, Dispatcher, executor, types
 
 from telebot.interfaces import authentication, manage_notes
 
-API_TOKEN = '5385570189:AAE4DoKqzzgoAJMuq-7IbDZl0mQUpUxJXvQ'
+API_TOKEN = ''
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
